@@ -1,32 +1,17 @@
 import './App.css';
-import TourCard from './components/TourCard';
-import Container from '@mui/material/Container';
-import Grid from "@mui/material/Grid"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home";
 import SearchAppBar from './components/AppBar';
-import cities from "./data.json"
-import { Typography } from '@mui/material';
+import Tour from './pages/Tour'
 
 function App() {
-  return (
-    <div className="App">
-      <SearchAppBar></SearchAppBar>
-      <Container sx={{marginY:5}}>
-        {cities.map((city)=>(
-          <>
-            <Typography varaint="h4" component="h2" marginTop={5} marginBottom={3}>
-              Top {city.name} Tours
-            </Typography>
-            <Grid container spacing={5}>
-              {city.tours.map((tour,index)=><TourCard tour={tour} key={index}></TourCard>)}
-            </Grid>
-          </>
-        ))}
-        
-        
-      </Container>
-      
-    </div>
-  );
+  return <BrowserRouter>
+    <SearchAppBar></SearchAppBar>
+    <Routes>
+      <Route path="/" element={<Home/>}></Route>
+      <Route path="/:id" element={<Tour/>}></Route>
+    </Routes>
+  </BrowserRouter>;
 }
 
 export default App;
